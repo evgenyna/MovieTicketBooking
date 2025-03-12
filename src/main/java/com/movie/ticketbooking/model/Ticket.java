@@ -1,9 +1,15 @@
 package com.movie.ticketbooking.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Ticket {
 
     @Id
@@ -20,55 +26,10 @@ public class Ticket {
 
     private int seatNumber;
 
-    // Default constructor (required by JPA)
-    public Ticket() {
-    }
-
-    // Correct constructor with UUID
-    public Ticket(UUID id, Showtime showtime, User user, int seatNumber) {
-        this.id = id;
-        this.showtime = showtime;
-        this.user = user;
-        this.seatNumber = seatNumber;
-    }
-
-    // Alternative constructor without UUID (JPA will auto-generate it)
+    // Alternative constructor (JPA will auto-generate ID)
     public Ticket(Showtime showtime, User user, int seatNumber) {
         this.showtime = showtime;
         this.user = user;
-        this.seatNumber = seatNumber;
-    }
-
-    // Getters and Setters
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Showtime getShowtime() {
-        return showtime;
-    }
-
-    public void setShowtime(Showtime showtime) {
-        this.showtime = showtime;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public int getSeatNumber() {
-        return seatNumber;
-    }
-
-    public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
     }
 }

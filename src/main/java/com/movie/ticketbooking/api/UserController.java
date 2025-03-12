@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/users")
-@Tag(name = "User API", description = "Manage Users")
+@Tag(name = "User API", description = "Endpoints for managing users")
 public class UserController {
 
     private final UserService userService;
@@ -24,52 +24,63 @@ public class UserController {
 
     // Get all users
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @Operation(summary = "Get all users", description = "Retrieve a list of all registered users.")
+    public ResponseEntity<List<User>> getAllUsers() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    // Get user by ID (accepts String, converts to UUID)
+    // Get a specific user by ID
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable String id) {
+    @Operation(summary = "Get user by ID", description = "Retrieve details of a specific user using their ID.")
+    public ResponseEntity<?> getUserById(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
-            return userService.getUserById(uuid)
-                    .map(ResponseEntity::ok)
+            Optional<User> user = userService.getUserById(uuid);
+
+            return user.map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build(); // Invalid UUID format
+            return ResponseEntity.badRequest().body("Invalid user ID format.");
         }
     }
 
     // Create a new user
     @PostMapping
+    @Operation(summary = "Create a new user", description = "Register a new user in the system.")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return ResponseEntity.ok(userService.saveUser(user));
     }
 
-    // Update a user
+    // Update an existing user
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody User userDetails) {
+    @Operation(summary = "Update user", description = "Update details of an existing user.")
+    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody User userDetails) {
         try {
             UUID uuid = UUID.fromString(id);
-            return userService.updateUser(uuid, userDetails)
-                    .map(ResponseEntity::ok)
+            Optional<User> updatedUser = userService.updateUser(uuid, userDetails);
+
+            return updatedUser.map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid user ID format.");
         }
     }
 
     // Delete a user
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+    @Operation(summary = "Delete user", description = "Remove a user from the system.")
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
-            return userService.deleteUser(uuid)
-                    ? ResponseEntity.noContent().build()
-                    : ResponseEntity.notFound().build();
+            boolean deleted = userService.deleteUser(uuid);
+
+            if (deleted) {
+                return ResponseEntity.ok("User deleted successfully.");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid user ID format.");
         }
     }
 }

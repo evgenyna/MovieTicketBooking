@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/movies")
-@Tag(name = "Movies API", description = "Manage Movies")
+@Tag(name = "Movies API", description = "Endpoints for managing movies")
 public class MovieController {
 
     private final MovieService movieService;
@@ -24,52 +24,57 @@ public class MovieController {
 
     // Get all movies
     @GetMapping
-    public List<Movie> getAllMovies() {
-        return movieService.getAllMovies();
+    @Operation(summary = "Get all movies", description = "Retrieve a list of all available movies.")
+    public ResponseEntity<List<Movie>> getAllMovies() {
+        return ResponseEntity.ok(movieService.getAllMovies());
     }
 
-    // Get movie by ID (convert String to UUID)
+    // Get movie by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovieById(@PathVariable String id) {
+    @Operation(summary = "Get a movie by ID", description = "Retrieve details of a specific movie by its ID.")
+    public ResponseEntity<?> getMovieById(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
             return movieService.getMovieById(uuid)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid movie ID format.");
         }
     }
 
     // Create a new movie
     @PostMapping
+    @Operation(summary = "Create a new movie", description = "Add a new movie to the system.")
     public ResponseEntity<Movie> createMovie(@RequestBody Movie movie) {
         return ResponseEntity.ok(movieService.saveMovie(movie));
     }
 
     // Update a movie
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(@PathVariable String id, @RequestBody Movie movieDetails) {
+    @Operation(summary = "Update a movie", description = "Modify an existing movie's details using its ID.")
+    public ResponseEntity<?> updateMovie(@PathVariable String id, @RequestBody Movie movieDetails) {
         try {
             UUID uuid = UUID.fromString(id);
             return movieService.updateMovie(uuid, movieDetails)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid movie ID format.");
         }
     }
 
     // Delete a movie
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable String id) {
+    @Operation(summary = "Delete a movie", description = "Remove a movie from the system using its ID.")
+    public ResponseEntity<?> deleteMovie(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
             return movieService.deleteMovie(uuid)
                     ? ResponseEntity.noContent().build()
                     : ResponseEntity.notFound().build();
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid movie ID format.");
         }
     }
 }

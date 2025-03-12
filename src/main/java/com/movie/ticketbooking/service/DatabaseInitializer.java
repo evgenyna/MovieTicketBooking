@@ -39,22 +39,23 @@ public class DatabaseInitializer {
         if (theaterRepository.count() == 0) {
             List<Theater> theaters = new ArrayList<>();
 
-            for (int t = 1; t <= 3; t++) {
-                List<Hall> halls = new ArrayList<>();
-                Theater theater = new Theater("Theater " + t, "Location " + t, halls);
+            for (int t = 1; t <= 5; t++) {
+                Theater theater = new Theater("Theater " + t, "Location " + t, new ArrayList<>());
 
-                // Create 3 halls for each theater
-                for (int h = 1; h <= 3; h++) {
-                    halls.add(new Hall("Hall " + h, 150, theater));
+                // Create 10 halls for each theater
+                for (int h = 1; h <= 10; h++) {
+                    Hall hall = new Hall("Hall " + h, 150+h*10, theater);
+                    theater.getHalls().add(hall); // Add hall to theater
                 }
 
                 theaters.add(theater);
             }
 
             theaterRepository.saveAll(theaters);
-            System.out.println("✅ Inserted Theaters & Halls into the database.");
+            System.out.println("Inserted Theaters & Halls into the database.");
         }
     }
+
 
     private void insertUsers() {
         if (userRepository.count() == 0) {
@@ -63,7 +64,7 @@ public class DatabaseInitializer {
                     new User("Bob Smith", "bob@example.com")
             );
             userRepository.saveAll(users);
-            System.out.println("✅ Inserted Users into the database.");
+            System.out.println("Inserted Users into the database.");
         }
     }
 
@@ -74,7 +75,7 @@ public class DatabaseInitializer {
                     new Movie("The Dark Knight", "Action", 152, 9.0, 2008)
             );
             movieRepository.saveAll(movies);
-            System.out.println("✅ Inserted Movies into the database.");
+            System.out.println("Inserted Movies into the database.");
         }
     }
 
@@ -97,7 +98,7 @@ public class DatabaseInitializer {
             }
 
             showtimeRepository.saveAll(showtimes);
-            System.out.println("✅ Inserted 10 showtimes into the database.");
+            System.out.println("Inserted 10 showtimes into the database.");
         }
     }
 }

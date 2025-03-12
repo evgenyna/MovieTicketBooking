@@ -32,6 +32,16 @@ public class Showtime {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
+    // Constructor without UUID (JPA will auto-generate ID)
+    public Showtime(Movie movie, Theater theater, Hall hall, LocalDateTime startTime) {
+        this.movie = movie;
+        this.theater = theater;
+        this.hall = hall;
+        this.startTime = startTime;
+        this.endTime = startTime.plusHours(2); // Default to 2-hour movie if not specified
+    }
+
+    // Constructor with explicit endTime
     public Showtime(Movie movie, Theater theater, Hall hall, LocalDateTime startTime, LocalDateTime endTime) {
         this.movie = movie;
         this.theater = theater;

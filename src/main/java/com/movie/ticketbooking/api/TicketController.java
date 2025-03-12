@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/tickets")
-@Tag(name = "Tickets API", description = "Manage Tickets")
+@Tag(name = "Tickets API", description = "Endpoints for managing ticket bookings and cancellations")
 public class TicketController {
 
     private final TicketService ticketService;
@@ -31,17 +31,19 @@ public class TicketController {
         this.userService = userService;
     }
 
-    // ✅ Get all tickets
+    // Get all tickets
     @GetMapping
+    @Operation(summary = "Get all tickets", description = "Retrieve a list of all booked tickets.")
     public ResponseEntity<List<Ticket>> getAllTickets() {
         return ResponseEntity.ok(ticketService.getAllTickets());
     }
 
-    // ✅ Get a specific ticket by ID
+    // Get a specific ticket by ID
     @GetMapping("/{ticketId}")
+    @Operation(summary = "Get ticket by ID", description = "Retrieve details of a booked ticket using its ID.")
     public ResponseEntity<?> getTicketById(@PathVariable String ticketId) {
         try {
-            UUID uuid = UUID.fromString(ticketId);  // ✅ Convert String to UUID
+            UUID uuid = UUID.fromString(ticketId);  // Convert String to UUID
             Optional<Ticket> ticket = ticketService.getTicketById(uuid);
 
             return ticket.map(ResponseEntity::ok)
@@ -52,8 +54,9 @@ public class TicketController {
         }
     }
 
-    // ✅ Book a new ticket
+    // Book a new ticket
     @PostMapping("/book")
+    @Operation(summary = "Book a ticket", description = "Book a ticket for a given showtime and user.")
     public ResponseEntity<?> bookTicket(
             @RequestParam String showtimeId,
             @RequestParam String userId,
@@ -80,8 +83,9 @@ public class TicketController {
         }
     }
 
-    // ✅ Cancel a ticket
+    // Cancel a ticket
     @DeleteMapping("/{ticketId}")
+    @Operation(summary = "Cancel a ticket", description = "Cancel a booked ticket using its ID.")
     public ResponseEntity<?> cancelTicket(@PathVariable String ticketId) {
         try {
             UUID uuid = UUID.fromString(ticketId);
@@ -96,7 +100,7 @@ public class TicketController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Invalid ticket ID format.");
         } catch (RuntimeException e) {
-            return ResponseEntity.badRequest().body(e.getMessage()); // Return error messages for business logic failures
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

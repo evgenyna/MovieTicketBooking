@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/theaters")
-//@Tag(name = "Theater API", description = "Manage Theaters")
+@Tag(name = "Theater API", description = "Endpoints for managing theaters")
 public class TheaterController {
 
     private final TheaterService theaterService;
@@ -22,18 +22,19 @@ public class TheaterController {
         this.theaterService = theaterService;
     }
 
-    // ✅ Get all theaters
+    // Get all theaters
     @GetMapping
-    @Tag(name = "Theater API", description = "Get all theaters")
+    @Operation(summary = "Get all theaters", description = "Retrieve a list of all available theaters.")
     public ResponseEntity<List<Theater>> getAllTheaters() {
         return ResponseEntity.ok(theaterService.getAllTheaters());
     }
 
-    // ✅ Get a specific theater by ID
+    // Get a specific theater by ID
     @GetMapping("/{theaterId}")
+    @Operation(summary = "Get a theater by ID", description = "Retrieve details of a specific theater by its ID.")
     public ResponseEntity<?> getTheaterById(@PathVariable String theaterId) {
         try {
-            UUID uuid = UUID.fromString(theaterId); // ✅ Convert to UUID
+            UUID uuid = UUID.fromString(theaterId);
             Optional<Theater> theater = theaterService.getTheaterById(uuid);
 
             return theater.map(ResponseEntity::ok)
@@ -44,15 +45,17 @@ public class TheaterController {
         }
     }
 
-    // ✅ Create a new theater
+    // Create a new theater
     @PostMapping
+    @Operation(summary = "Create a new theater", description = "Add a new theater to the system.")
     public ResponseEntity<Theater> createTheater(@RequestBody Theater theater) {
         Theater savedTheater = theaterService.addTheater(theater);
         return ResponseEntity.ok(savedTheater);
     }
 
-    // ✅ Update an existing theater
+    // Update an existing theater
     @PutMapping("/{theaterId}")
+    @Operation(summary = "Update a theater", description = "Modify an existing theater's details using its ID.")
     public ResponseEntity<?> updateTheater(@PathVariable String theaterId, @RequestBody Theater theaterDetails) {
         try {
             UUID uuid = UUID.fromString(theaterId);
@@ -66,8 +69,9 @@ public class TheaterController {
         }
     }
 
-    // ✅ Delete a theater
+    // Delete a theater
     @DeleteMapping("/{theaterId}")
+    @Operation(summary = "Delete a theater", description = "Remove a theater from the system using its ID.")
     public ResponseEntity<?> deleteTheater(@PathVariable String theaterId) {
         try {
             UUID uuid = UUID.fromString(theaterId);
@@ -84,53 +88,3 @@ public class TheaterController {
         }
     }
 }
-
-//package com.movie.ticketbooking.api;
-//
-//import com.movie.ticketbooking.model.Theater;
-//import com.movie.ticketbooking.service.TheaterService;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.*;
-//
-//import java.util.List;
-//import java.util.Optional;
-//import java.util.UUID;
-//
-//@RestController
-//@RequestMapping("/api/theaters")
-//public class TheaterController {
-//
-//    private final TheaterService theaterService;
-//
-//    public TheaterController(TheaterService theaterService) {
-//        this.theaterService = theaterService;
-//    }
-//
-//    @GetMapping
-//    public List<Theater> getAllTheaters() {
-//        return theaterService.getAllTheaters();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Theater> getTheaterById(@PathVariable UUID id) {
-//        Optional<Theater> theater = theaterService.getTheaterById(id);
-//        return theater.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @PostMapping
-//    public Theater createTheater(@RequestBody Theater theater) {
-//        return theaterService.addTheater(theater);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Theater> updateTheater(@PathVariable UUID id, @RequestBody Theater theaterDetails) {
-//        Optional<Theater> updatedTheater = theaterService.updateTheater(id, theaterDetails);
-//        return updatedTheater.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteTheater(@PathVariable UUID id) {
-//        boolean deleted = theaterService.deleteTheater(id);
-//        return deleted ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
-//    }
-//}

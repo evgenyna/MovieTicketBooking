@@ -39,9 +39,11 @@ public class HallService {
         });
     }
 
-    public boolean deleteHall(UUID id) {
-        if (hallRepository.existsById(id)) {
-            hallRepository.deleteById(id);
+    public boolean deleteHall(UUID hallId) {
+        Optional<Hall> hall = hallRepository.findById(hallId);
+
+        if (hall.isPresent()) {
+            hallRepository.delete(hall.get()); // Cascade deletion will remove showtimes & tickets
             return true;
         }
         return false;

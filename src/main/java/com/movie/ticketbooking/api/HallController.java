@@ -15,11 +15,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/halls")
-@Tag(name = "Halls API", description = "Manage Halls")
+@Tag(name = "Hall API", description = "Endpoints for managing halls")
 public class HallController {
 
     private final HallService hallService;
-    private final TheaterService theaterService; // Needed to fetch theaters when creating halls
+    private final TheaterService theaterService;
 
     public HallController(HallService hallService, TheaterService theaterService) {
         this.hallService = hallService;
@@ -28,25 +28,28 @@ public class HallController {
 
     // Get all halls
     @GetMapping
-    public List<Hall> getAllHalls() {
-        return hallService.getAllHalls();
+    @Operation(summary = "Get all halls", description = "Retrieve a list of all available halls.")
+    public ResponseEntity<List<Hall>> getAllHalls() {
+        return ResponseEntity.ok(hallService.getAllHalls());
     }
 
-    // Get hall by ID
+    // Get a hall by ID
     @GetMapping("/{id}")
-    public ResponseEntity<Hall> getHallById(@PathVariable String id) {
+    @Operation(summary = "Get a hall by ID", description = "Retrieve details of a specific hall by its ID.")
+    public ResponseEntity<?> getHallById(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
             return hallService.getHallById(uuid)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid hall ID format.");
         }
     }
 
     // Create a new hall
     @PostMapping
+    @Operation(summary = "Create a new hall", description = "Add a new hall to the system.")
     public ResponseEntity<?> createHall(@RequestBody Hall hall) {
         try {
             return ResponseEntity.ok(hallService.addHall(hall));
@@ -57,10 +60,11 @@ public class HallController {
 
     // Create a new hall in a specific theater
     @PostMapping("/theater/{theaterId}")
+    @Operation(summary = "Create a hall in a theater", description = "Add a new hall inside a specific theater.")
     public ResponseEntity<?> createHallInTheater(@PathVariable String theaterId, @RequestBody Hall hall) {
         try {
-            UUID uuid = UUID.fromString(theaterId); // ✅ Convert to UUID
-            Optional<Theater> theater = theaterService.getTheaterById(uuid); // ✅ Fetch using UUID
+            UUID uuid = UUID.fromString(theaterId);
+            Optional<Theater> theater = theaterService.getTheaterById(uuid);
 
             if (theater.isPresent()) {
                 hall.setTheater(theater.get());
@@ -75,27 +79,29 @@ public class HallController {
 
     // Update a hall
     @PutMapping("/{id}")
-    public ResponseEntity<Hall> updateHall(@PathVariable String id, @RequestBody Hall hallDetails) {
+    @Operation(summary = "Update a hall", description = "Modify an existing hall's details using its ID.")
+    public ResponseEntity<?> updateHall(@PathVariable String id, @RequestBody Hall hallDetails) {
         try {
             UUID uuid = UUID.fromString(id);
             return hallService.updateHall(uuid, hallDetails)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid hall ID format.");
         }
     }
 
     // Delete a hall
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHall(@PathVariable String id) {
+    @Operation(summary = "Delete a hall", description = "Remove a hall from the system using its ID.")
+    public ResponseEntity<?> deleteHall(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);
             return hallService.deleteHall(uuid)
                     ? ResponseEntity.noContent().build()
                     : ResponseEntity.notFound().build();
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body("Invalid hall ID format.");
         }
     }
 }
