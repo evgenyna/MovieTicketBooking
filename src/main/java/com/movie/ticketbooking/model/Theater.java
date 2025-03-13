@@ -1,5 +1,6 @@
 package com.movie.ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,13 +24,13 @@ public class Theater {
     private String location;
 
     @OneToMany(mappedBy = "theater", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    @JsonManagedReference // Prevents infinite recursion
+    @JsonIgnore  // Prevents infinite recursion
     private List<Hall> halls = new ArrayList<>();
 
     // Constructor with halls for DatabaseInitializer
     public Theater(String name, String location, List<Hall> halls) {
         this.name = name;
         this.location = location;
-        this.halls = halls != null ? halls : new ArrayList<>();
+        //this.halls = halls != null ? halls : new ArrayList<>();
     }
 }

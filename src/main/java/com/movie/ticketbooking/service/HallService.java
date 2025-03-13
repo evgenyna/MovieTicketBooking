@@ -1,6 +1,7 @@
 package com.movie.ticketbooking.service;
 
 import com.movie.ticketbooking.dao.HallRepository;
+import com.movie.ticketbooking.dto.HallRequestDTO;
 import com.movie.ticketbooking.model.Hall;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -31,7 +32,7 @@ public class HallService {
         return hallRepository.save(hall);
     }
 
-    public Optional<Hall> updateHall(UUID id, Hall hallDetails) {
+    public Optional<Hall> updateHall(UUID id, HallRequestDTO hallDetails) {
         return hallRepository.findById(id).map(existingHall -> {
             existingHall.setName(hallDetails.getName());
             existingHall.setCapacity(hallDetails.getCapacity());

@@ -60,7 +60,7 @@ public class TheaterService {
             List<Hall> halls = hallRepository.findByTheater(theater);
 
             // Step 2: Get all showtimes related to these halls
-            List<Showtime> showtimes = showtimeRepository.findAllByHallIn(halls);
+            List<Showtime> showtimes = showtimeRepository.findAllByHalls (halls);
             showtimeRepository.deleteAll(showtimes);
 
             // Step 3: Delete all halls
