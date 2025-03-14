@@ -57,7 +57,7 @@ Ensure you have installed:
 1️⃣ **Clone the Repository**
 
 ```sh
-git clone https://github.com/YOUR_GITHUB_USERNAME/MovieTicketBooking.git
+git clone https://github.com/evgenyna/MovieTicketBooking.git
 cd MovieTicketBooking
 ```
 
@@ -106,7 +106,7 @@ Once the server is running, open the **Swagger UI**:
 | GET    | `/api/movies/{id}` | Get movie by ID |
 | POST   | `/api/movies`      | Add a new movie |
 | PUT    | `/api/movies/{id}` | Update movie    |
-| DELETE | `/api/movies/{id}` | Delete movie    |
+| DELETE | `/api/movies/{id}` | Delete movie *(Next update: will work with ticket events)* |
 
 ### 🎟 Tickets
 
@@ -118,6 +118,21 @@ Once the server is running, open the **Swagger UI**:
 | DELETE | `/api/tickets/{id}` | Cancel a ticket        |
 
 📌 **For more API endpoints, visit Swagger UI!**
+
+---
+
+## 📩 Postman Collection
+
+To test the API using **Postman**, download and import the collection:
+
+[📥 Download Postman Collection](sandbox:/mnt/data/Movie%20Ticket%20Booking%20API.postman_collection.json)
+
+---
+
+## 🛡️ Known Limitations (Next Update)
+
+- **Deleting Movies, Showtimes, Halls, Theaters, and Users currently works only if they have no relation to Ticket Events.**
+- **Next update will ensure full deletion with cascading ticket event handling.**
 
 ---
 
@@ -153,7 +168,7 @@ Want to contribute? Feel free to fork the repo and submit a pull request!
 
 ## 📩 Contact
 
-For queries or suggestions, contact [**your_email@example.com**](mailto:your_email@example.com).
+For queries or suggestions, visit the GitHub repository: [evgenyna/MovieTicketBooking](https://github.com/evgenyna/MovieTicketBooking)
 
 ---
 
