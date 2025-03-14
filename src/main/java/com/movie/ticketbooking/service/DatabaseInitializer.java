@@ -119,7 +119,7 @@ public class DatabaseInitializer {
             while (now.isBefore(twoMonthsLater)) {
                 for (Theater theater : theaters) {
                     //List<Hall> halls = theater.getHalls(); // Get halls for this theater
-                    List<Hall> halls = hallRepository.findByTheater(theater);  // ✅ Correct
+                    List<Hall> halls = hallRepository.findByTheater(theater);  // Correct
 
                     int movieIndex = 0;
                     for (Hall hall : halls) {
@@ -143,36 +143,6 @@ public class DatabaseInitializer {
         }
     }
 
-
-//    private void insertShowtimes() {
-//        if (showtimeRepository.count() == 0) {
-//            List<Movie> movies = movieRepository.findAll();
-//            List<Hall> halls = hallRepository.findAll();
-//            List<Theater> theaters = theaterRepository.findAll();
-//
-//            List<Showtime> showtimes = new ArrayList<>();
-//
-//            LocalDateTime now = LocalDateTime.now();
-//            LocalDateTime twoMonthsLater = now.plusMonths(2);
-//
-//            while (now.isBefore(twoMonthsLater)) {
-//                for (Movie movie : movies) {
-//                    for (Hall hall : halls) {
-//                        Theater theater = hall.getTheater();
-//                        LocalDateTime startTime = now;
-//                        LocalDateTime endTime = startTime.plusHours(2); // Assuming 2-hour movie duration
-//
-//                        showtimes.add(new Showtime(movie, theater, hall, startTime, endTime));
-//                    }
-//                }
-//                now = now.plusDays(1); // Move to the next day
-//            }
-//
-//            showtimeRepository.saveAll(showtimes);
-//            System.out.println(" Inserted Showtimes for the Next 2 Months into the database.");
-//        }
-//    }
-
     private void insertTickets() {
         if (ticketRepository.count() == 0) {
             List<User> users = userRepository.findAll();
@@ -190,8 +160,9 @@ public class DatabaseInitializer {
                     if (randomShowtime != null) {
                         Hall hall = randomShowtime.getHall();
                         int seatNumber = getRandomSeat(hall.getCapacity());
+                        double price = 12.99; // Default price
 
-                        tickets.add(new Ticket(randomShowtime, user, seatNumber));
+                        tickets.add(new Ticket(randomShowtime, user, seatNumber, price));
                         createdTickets ++;
                         userShowtimes.add(randomShowtime); // Add to user's showtimes to prevent overlap
                     }

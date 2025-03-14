@@ -40,9 +40,9 @@ public class TicketService {
         return ticketRepository.findById(id);
     }
 
-    public Ticket bookTicket(Showtime showtime, User user, int seatNumber) {
-        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}",
-                user.getId(), showtime.getId(), seatNumber);
+    public Ticket bookTicket(Showtime showtime, User user, int seatNumber, double price) {
+        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}, Price: {}",
+                user.getId(), showtime.getId(), seatNumber, price);
 
         if (seatNumber <= 0 || seatNumber > showtime.getHall().getCapacity()) {
             logger.warn("Invalid seat number {}. Must be between 1 and {}",
@@ -62,7 +62,7 @@ public class TicketService {
             throw new RuntimeException("Seat already booked for this showtime.");
         }
 
-        // ✅ Check if user has an overlapping booking
+        // Check if user has an overlapping booking
         List<Ticket> overlappingTickets = ticketRepository.findOverlappingTickets(
                 user, showtime.getStartTime(), showtime.getEndTime());
 
@@ -72,40 +72,13 @@ public class TicketService {
             throw new RuntimeException("You already have a booking during this time.");
         }
 
-        // ✅ Save the ticket if no conflicts
-        Ticket ticket = new Ticket(showtime, user, seatNumber);
+        // Save the ticket if no conflicts
+        Ticket ticket = new Ticket(showtime, user, seatNumber, price);
         Ticket savedTicket = ticketRepository.save(ticket);
-        logger.info("🎟️ Ticket booked successfully. Ticket ID: {}", savedTicket.getId());
+        logger.info("🎟️ Ticket booked successfully. Ticket ID: {}, Price: {}", savedTicket.getId(), price);
 
         return savedTicket;
     }
-
-
-//    //  Book a ticket
-//    public Ticket bookTicket(Showtime showtime, User user, int seatNumber) {
-//        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}", user.getId(), showtime.getId(), seatNumber);
-//
-//        if (seatNumber <= 0 || seatNumber > showtime.getHall().getCapacity()) {
-//            logger.warn("Invalid seat number {}. Must be between 1 and {}", seatNumber, showtime.getHall().getCapacity());
-//            throw new RuntimeException("Invalid seat number! Must be between 1 and " + showtime.getHall().getCapacity());
-//        }
-//
-//        if (LocalDateTime.now().isAfter(showtime.getStartTime().minusHours(3))) {
-//            logger.warn("Booking failed. Cannot book tickets within 3 hours of showtime.");
-//            throw new RuntimeException("Cannot book tickets within 3 hours of showtime.");
-//        }
-//
-//        if (ticketRepository.existsByShowtimeAndSeatNumber(showtime, seatNumber)) {
-//            logger.warn("Booking failed. Seat {} is already booked for Showtime: {}", seatNumber, showtime.getId());
-//            throw new RuntimeException("Seat already booked for this showtime.");
-//        }
-//
-//        Ticket ticket = new Ticket(showtime, user, seatNumber);
-//        Ticket savedTicket = ticketRepository.save(ticket);
-//        logger.info(" Ticket booked successfully. Ticket ID: {}", savedTicket.getId());
-//
-//        return savedTicket;
-//    }
 
     //  Cancel a ticket
     public boolean cancelTicket(UUID ticketId) {

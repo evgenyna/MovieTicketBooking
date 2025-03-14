@@ -26,10 +26,13 @@ public class Ticket {
 
     private int seatNumber;
 
+    private double price;
+
     // Alternative constructor (JPA will auto-generate ID)
-    public Ticket(Showtime showtime, User user, int seatNumber) {
+    public Ticket(Showtime showtime, User user, int seatNumber, double price) {
         this.showtime = showtime;
         this.user = user;
         this.seatNumber = seatNumber;
+        this.price = price;
     }
 }

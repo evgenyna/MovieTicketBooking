@@ -80,7 +80,8 @@ public class TicketController {
     public ResponseEntity<?> bookTicket(
             @RequestParam String showtimeId,
             @RequestParam String userId,
-            @RequestParam int seatNumber
+            @RequestParam int seatNumber,
+            @RequestParam double price
     ) {
         try {
             UUID showtimeUUID = UUID.fromString(showtimeId);
@@ -93,7 +94,7 @@ public class TicketController {
                 return ResponseEntity.badRequest().body("Invalid Showtime or User ID.");
             }
 
-            Ticket bookedTicket = ticketService.bookTicket(showtime.get(), user.get(), seatNumber);
+            Ticket bookedTicket = ticketService.bookTicket(showtime.get(), user.get(), seatNumber, price);
             return ResponseEntity.ok(bookedTicket);
 
         } catch (IllegalArgumentException e) {

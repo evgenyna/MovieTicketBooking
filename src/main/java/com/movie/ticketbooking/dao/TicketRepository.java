@@ -17,7 +17,7 @@ public interface TicketRepository extends JpaRepository<Ticket, UUID> {
     boolean existsByShowtimeAndSeatNumber(Showtime showtime, int seatNumber);
     //  Add method to find all tickets by a specific user
     List<Ticket> findByUser(User user);
-    // ✅ Find tickets for the user that have overlapping showtimes
+    // Find tickets for the user that have overlapping showtimes
     @Query("SELECT t FROM Ticket t WHERE t.user = :user AND " +
             "t.showtime.startTime < :endTime AND t.showtime.endTime > :startTime")
     List<Ticket> findOverlappingTickets(@Param("user") User user,
