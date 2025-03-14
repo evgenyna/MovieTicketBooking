@@ -1,9 +1,11 @@
 package com.movie.ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +30,11 @@ public class Showtime {
     @ManyToOne
     @JoinColumn(name = "hall_id", nullable = false)
     private Hall hall;
+
+    @OneToMany(mappedBy = "showtime", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Ticket> tickets; // Ensures all tickets are deleted when a showtime is deleted
+
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;

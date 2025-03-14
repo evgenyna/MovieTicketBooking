@@ -1,10 +1,12 @@
 package com.movie.ticketbooking.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +18,10 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore // Avoids recursion in JSON responses
+    private List<Showtime> showtimes; // Ensures all showtimes are deleted when a movie is deleted
 
     private String title;
     private String genre;

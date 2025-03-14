@@ -108,31 +108,70 @@ public class DatabaseInitializer {
     private void insertShowtimes() {
         if (showtimeRepository.count() == 0) {
             List<Movie> movies = movieRepository.findAll();
-            List<Hall> halls = hallRepository.findAll();
             List<Theater> theaters = theaterRepository.findAll();
-
             List<Showtime> showtimes = new ArrayList<>();
 
             LocalDateTime now = LocalDateTime.now();
             LocalDateTime twoMonthsLater = now.plusMonths(2);
 
+            int createdShowtimes = 0; // Counter for created showtimes
+
             while (now.isBefore(twoMonthsLater)) {
-                for (Movie movie : movies) {
+                for (Theater theater : theaters) {
+                    //List<Hall> halls = theater.getHalls(); // Get halls for this theater
+                    List<Hall> halls = hallRepository.findByTheater(theater);  // ✅ Correct
+
+                    int movieIndex = 0;
                     for (Hall hall : halls) {
-                        Theater theater = hall.getTheater();
-                        LocalDateTime startTime = now;
-                        LocalDateTime endTime = startTime.plusHours(2); // Assuming 2-hour movie duration
+                        if (movies.isEmpty()) break; // Ensure there are movies to schedule
+
+                        Movie movie = movies.get(movieIndex % movies.size()); // Rotate through movies
+                        LocalDateTime startTime = now.withHour(18).withMinute(0); // 6:00 PM Show
+                        LocalDateTime endTime = startTime.plusHours(2); // Assuming 2-hour duration
 
                         showtimes.add(new Showtime(movie, theater, hall, startTime, endTime));
+
+                        movieIndex++; // Move to the next movie for the next hall
+                        createdShowtimes++;
                     }
                 }
                 now = now.plusDays(1); // Move to the next day
             }
 
             showtimeRepository.saveAll(showtimes);
-            System.out.println(" Inserted Showtimes for the Next 2 Months into the database.");
+            System.out.println(" Inserted " + createdShowtimes + " Showtimes for the Next 2 Months with Multiple Movies per Theater.");
         }
     }
+
+
+//    private void insertShowtimes() {
+//        if (showtimeRepository.count() == 0) {
+//            List<Movie> movies = movieRepository.findAll();
+//            List<Hall> halls = hallRepository.findAll();
+//            List<Theater> theaters = theaterRepository.findAll();
+//
+//            List<Showtime> showtimes = new ArrayList<>();
+//
+//            LocalDateTime now = LocalDateTime.now();
+//            LocalDateTime twoMonthsLater = now.plusMonths(2);
+//
+//            while (now.isBefore(twoMonthsLater)) {
+//                for (Movie movie : movies) {
+//                    for (Hall hall : halls) {
+//                        Theater theater = hall.getTheater();
+//                        LocalDateTime startTime = now;
+//                        LocalDateTime endTime = startTime.plusHours(2); // Assuming 2-hour movie duration
+//
+//                        showtimes.add(new Showtime(movie, theater, hall, startTime, endTime));
+//                    }
+//                }
+//                now = now.plusDays(1); // Move to the next day
+//            }
+//
+//            showtimeRepository.saveAll(showtimes);
+//            System.out.println(" Inserted Showtimes for the Next 2 Months into the database.");
+//        }
+//    }
 
     private void insertTickets() {
         if (ticketRepository.count() == 0) {
@@ -140,7 +179,7 @@ public class DatabaseInitializer {
             List<Showtime> showtimes = showtimeRepository.findAll();
 
             List<Ticket> tickets = new ArrayList<>();
-
+            int createdTickets = 0; // Counter for created showtimes
             for (User user : users) {
                 List<Showtime> userShowtimes = new ArrayList<>();
                 int ticketsToCreate = Math.min(5, showtimes.size()); // Up to 5 tickets per user
@@ -153,13 +192,14 @@ public class DatabaseInitializer {
                         int seatNumber = getRandomSeat(hall.getCapacity());
 
                         tickets.add(new Ticket(randomShowtime, user, seatNumber));
+                        createdTickets ++;
                         userShowtimes.add(randomShowtime); // Add to user's showtimes to prevent overlap
                     }
                 }
             }
 
             ticketRepository.saveAll(tickets);
-            System.out.println(" Inserted up to 5 tickets per user for non-overlapping showtimes.");
+            System.out.println(" Inserted  " + createdTickets + "  tickets for users for non-overlapping showtimes.");
         }
     }
 
@@ -188,6 +228,4 @@ public class DatabaseInitializer {
     private int getRandomSeat(int capacity) {
         return (int) (Math.random() * capacity) + 1;
     }
-
-
 }

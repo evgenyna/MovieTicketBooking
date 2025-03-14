@@ -1,6 +1,8 @@
 package com.movie.ticketbooking.model;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,6 +15,10 @@ public class User {
 
     private String name;
     private String email;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Ticket> tickets; // Ensures all tickets are deleted when a user is deleted
+
 
     // Default constructor (required by JPA)
     public User() {

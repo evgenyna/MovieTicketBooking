@@ -40,13 +40,15 @@ public class TicketService {
         return ticketRepository.findById(id);
     }
 
-    //  Book a ticket
     public Ticket bookTicket(Showtime showtime, User user, int seatNumber) {
-        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}", user.getId(), showtime.getId(), seatNumber);
+        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}",
+                user.getId(), showtime.getId(), seatNumber);
 
         if (seatNumber <= 0 || seatNumber > showtime.getHall().getCapacity()) {
-            logger.warn("Invalid seat number {}. Must be between 1 and {}", seatNumber, showtime.getHall().getCapacity());
-            throw new RuntimeException("Invalid seat number! Must be between 1 and " + showtime.getHall().getCapacity());
+            logger.warn("Invalid seat number {}. Must be between 1 and {}",
+                    seatNumber, showtime.getHall().getCapacity());
+            throw new RuntimeException("Invalid seat number! Must be between 1 and " +
+                    showtime.getHall().getCapacity());
         }
 
         if (LocalDateTime.now().isAfter(showtime.getStartTime().minusHours(3))) {
@@ -55,16 +57,55 @@ public class TicketService {
         }
 
         if (ticketRepository.existsByShowtimeAndSeatNumber(showtime, seatNumber)) {
-            logger.warn("Booking failed. Seat {} is already booked for Showtime: {}", seatNumber, showtime.getId());
+            logger.warn("Booking failed. Seat {} is already booked for Showtime: {}",
+                    seatNumber, showtime.getId());
             throw new RuntimeException("Seat already booked for this showtime.");
         }
 
+        // ✅ Check if user has an overlapping booking
+        List<Ticket> overlappingTickets = ticketRepository.findOverlappingTickets(
+                user, showtime.getStartTime(), showtime.getEndTime());
+
+        if (!overlappingTickets.isEmpty()) {
+            logger.warn("Booking failed. User {} already has a ticket in overlapping time: {}",
+                    user.getId(), overlappingTickets.get(0).getShowtime().getId());
+            throw new RuntimeException("You already have a booking during this time.");
+        }
+
+        // ✅ Save the ticket if no conflicts
         Ticket ticket = new Ticket(showtime, user, seatNumber);
         Ticket savedTicket = ticketRepository.save(ticket);
-        logger.info(" Ticket booked successfully. Ticket ID: {}", savedTicket.getId());
+        logger.info("🎟️ Ticket booked successfully. Ticket ID: {}", savedTicket.getId());
 
         return savedTicket;
     }
+
+
+//    //  Book a ticket
+//    public Ticket bookTicket(Showtime showtime, User user, int seatNumber) {
+//        logger.info("Attempting to book a ticket for User: {}, Showtime: {}, Seat: {}", user.getId(), showtime.getId(), seatNumber);
+//
+//        if (seatNumber <= 0 || seatNumber > showtime.getHall().getCapacity()) {
+//            logger.warn("Invalid seat number {}. Must be between 1 and {}", seatNumber, showtime.getHall().getCapacity());
+//            throw new RuntimeException("Invalid seat number! Must be between 1 and " + showtime.getHall().getCapacity());
+//        }
+//
+//        if (LocalDateTime.now().isAfter(showtime.getStartTime().minusHours(3))) {
+//            logger.warn("Booking failed. Cannot book tickets within 3 hours of showtime.");
+//            throw new RuntimeException("Cannot book tickets within 3 hours of showtime.");
+//        }
+//
+//        if (ticketRepository.existsByShowtimeAndSeatNumber(showtime, seatNumber)) {
+//            logger.warn("Booking failed. Seat {} is already booked for Showtime: {}", seatNumber, showtime.getId());
+//            throw new RuntimeException("Seat already booked for this showtime.");
+//        }
+//
+//        Ticket ticket = new Ticket(showtime, user, seatNumber);
+//        Ticket savedTicket = ticketRepository.save(ticket);
+//        logger.info(" Ticket booked successfully. Ticket ID: {}", savedTicket.getId());
+//
+//        return savedTicket;
+//    }
 
     //  Cancel a ticket
     public boolean cancelTicket(UUID ticketId) {
