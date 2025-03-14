@@ -66,7 +66,7 @@ public class MovieController {
 
     // Delete a movie
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete a movie", description = "Remove a movie from the system using its ID.")
+    @Operation(summary = "Delete a movie", description = "Remove a movie from the system using its ID. (Next update: will work with ticket events)")
     public ResponseEntity<?> deleteMovie(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);

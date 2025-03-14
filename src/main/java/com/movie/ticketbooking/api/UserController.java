@@ -68,7 +68,7 @@ public class UserController {
 
     // Delete a user
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete user", description = "Remove a user from the system.")
+    @Operation(summary = "Delete user", description = "Remove a user from the system. (Next update: will work with ticket events)")
     public ResponseEntity<?> deleteUser(@PathVariable String id) {
         try {
             UUID uuid = UUID.fromString(id);

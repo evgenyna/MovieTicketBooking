@@ -1,0 +1,2427 @@
+{
+	"info": {
+		"_postman_id": "4bbef14a-27fe-4e4d-be2a-07791cd1e434",
+		"name": "Movie Ticket Booking API",
+		"description": "API documentation for the Movie Ticket Booking System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21107958",
+		"_collection_link": "https://orange-escape-363547.postman.co/workspace/My-Workspace~4aafaa56-661f-493c-8d4b-845903efc864/collection/21107958-4bbef14a-27fe-4e4d-be2a-07791cd1e434?action=share&source=collection_link&creator=21107958"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get user by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a specific user using their ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Update user",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Update details of an existing user."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Delete user",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/users/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"users",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Remove a user from the system."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/users/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"users",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all users",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/users",
+								"description": "Retrieve a list of all registered users."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/users"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"email\": \"<string>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a new user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/users",
+								"description": "Register a new user in the system."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/users"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"email\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "tickets",
+					"item": [
+						{
+							"name": "{ticketId}",
+							"item": [
+								{
+									"name": "change-seat",
+									"item": [
+										{
+											"name": "Change ticket seat",
+											"request": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/tickets/:ticketId/change-seat?newSeatNumber=<integer>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"tickets",
+														":ticketId",
+														"change-seat"
+													],
+													"query": [
+														{
+															"key": "newSeatNumber",
+															"value": "<integer>",
+															"description": "(Required) "
+														}
+													],
+													"variable": [
+														{
+															"key": "ticketId",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Allows a user to change the seat for a booked ticket."
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "PUT",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/tickets/:ticketId/change-seat?newSeatNumber=<integer>",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"tickets",
+																":ticketId",
+																"change-seat"
+															],
+															"query": [
+																{
+																	"key": "newSeatNumber",
+																	"value": "<integer>",
+																	"description": "(Required) "
+																}
+															],
+															"variable": [
+																{
+																	"key": "ticketId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								},
+								{
+									"name": "Get ticket by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/tickets/:ticketId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"tickets",
+												":ticketId"
+											],
+											"variable": [
+												{
+													"key": "ticketId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a booked ticket using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/tickets/:ticketId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"tickets",
+														":ticketId"
+													],
+													"variable": [
+														{
+															"key": "ticketId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Cancel a ticket",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/tickets/:ticketId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"tickets",
+												":ticketId"
+											],
+											"variable": [
+												{
+													"key": "ticketId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Cancel a booked ticket using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/tickets/:ticketId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"tickets",
+														":ticketId"
+													],
+													"variable": [
+														{
+															"key": "ticketId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "book",
+							"item": [
+								{
+									"name": "Book a ticket",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/tickets/book?showtimeId=<string>&userId=<string>&seatNumber=<integer>&price=<double>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"tickets",
+												"book"
+											],
+											"query": [
+												{
+													"key": "showtimeId",
+													"value": "<string>",
+													"description": "(Required) "
+												},
+												{
+													"key": "userId",
+													"value": "<string>",
+													"description": "(Required) "
+												},
+												{
+													"key": "seatNumber",
+													"value": "<integer>",
+													"description": "(Required) "
+												},
+												{
+													"key": "price",
+													"value": "<double>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Book a ticket for a given showtime and user."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/tickets/book?showtimeId=<string>&userId=<string>&seatNumber=<integer>&price=<double>",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"tickets",
+														"book"
+													],
+													"query": [
+														{
+															"key": "showtimeId",
+															"value": "<string>",
+															"description": "(Required) "
+														},
+														{
+															"key": "userId",
+															"value": "<string>",
+															"description": "(Required) "
+														},
+														{
+															"key": "seatNumber",
+															"value": "<integer>",
+															"description": "(Required) "
+														},
+														{
+															"key": "price",
+															"value": "<double>",
+															"description": "(Required) "
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "{userId}",
+									"item": [
+										{
+											"name": "Get all tickets by user",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/tickets/user/:userId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"tickets",
+														"user",
+														":userId"
+													],
+													"variable": [
+														{
+															"key": "userId",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Retrieve all tickets booked by a specific user."
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/tickets/user/:userId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"tickets",
+																"user",
+																":userId"
+															],
+															"variable": [
+																{
+																	"key": "userId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "{}"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all tickets",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/tickets",
+								"description": "Retrieve a list of all booked tickets."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/tickets"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"showtime\": {\n      \"id\": \"<uuid>\",\n      \"movie\": {\n        \"id\": \"<uuid>\",\n        \"title\": \"<string>\",\n        \"genre\": \"<string>\",\n        \"duration\": \"<integer>\",\n        \"rating\": \"<double>\",\n        \"releaseYear\": \"<integer>\"\n      },\n      \"theater\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"hall\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"capacity\": \"<integer>\"\n      },\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    },\n    \"user\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"seatNumber\": \"<integer>\",\n    \"price\": \"<double>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"showtime\": {\n      \"id\": \"<uuid>\",\n      \"movie\": {\n        \"id\": \"<uuid>\",\n        \"title\": \"<string>\",\n        \"genre\": \"<string>\",\n        \"duration\": \"<integer>\",\n        \"rating\": \"<double>\",\n        \"releaseYear\": \"<integer>\"\n      },\n      \"theater\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"hall\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"capacity\": \"<integer>\"\n      },\n      \"startTime\": \"<dateTime>\",\n      \"endTime\": \"<dateTime>\"\n    },\n    \"user\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\"\n    },\n    \"seatNumber\": \"<integer>\",\n    \"price\": \"<double>\"\n  }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "theaters",
+					"item": [
+						{
+							"name": "{theaterId}",
+							"item": [
+								{
+									"name": "Get a theater by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/theaters/:theaterId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"theaters",
+												":theaterId"
+											],
+											"variable": [
+												{
+													"key": "theaterId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a specific theater by its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/theaters/:theaterId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"theaters",
+														":theaterId"
+													],
+													"variable": [
+														{
+															"key": "theaterId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Update a theater",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/theaters/:theaterId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"theaters",
+												":theaterId"
+											],
+											"variable": [
+												{
+													"key": "theaterId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Modify an existing theater's details using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/theaters/:theaterId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"theaters",
+														":theaterId"
+													],
+													"variable": [
+														{
+															"key": "theaterId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Delete a theater",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/theaters/:theaterId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"theaters",
+												":theaterId"
+											],
+											"variable": [
+												{
+													"key": "theaterId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Remove a theater from the system using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/theaters/:theaterId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"theaters",
+														":theaterId"
+													],
+													"variable": [
+														{
+															"key": "theaterId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all theaters",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/theaters",
+								"description": "Retrieve a list of all available theaters."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/theaters"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"location\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"location\": \"<string>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a new theater",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/theaters",
+								"description": "Add a new theater to the system."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/theaters"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"location\": \"<string>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "showtimes",
+					"item": [
+						{
+							"name": "{showtimeId}",
+							"item": [
+								{
+									"name": "Get a showtime by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"showtimes",
+												":showtimeId"
+											],
+											"variable": [
+												{
+													"key": "showtimeId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a specific showtime by its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"showtimes",
+														":showtimeId"
+													],
+													"variable": [
+														{
+															"key": "showtimeId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Update a showtime",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"movieId\": \"<string>\",\n  \"hallId\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"showtimes",
+												":showtimeId"
+											],
+											"variable": [
+												{
+													"key": "showtimeId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Modify the details of an existing showtime."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"movieId\": \"<string>\",\n  \"hallId\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"showtimes",
+														":showtimeId"
+													],
+													"variable": [
+														{
+															"key": "showtimeId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Delete a showtime",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"showtimes",
+												":showtimeId"
+											],
+											"variable": [
+												{
+													"key": "showtimeId",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Remove a showtime from the schedule."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/showtimes/:showtimeId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"showtimes",
+														":showtimeId"
+													],
+													"variable": [
+														{
+															"key": "showtimeId"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "halls",
+							"item": [
+								{
+									"name": "{movieId}",
+									"item": [
+										{
+											"name": "Get halls screening a movie",
+											"request": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/showtimes/halls/:movieId",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"showtimes",
+														"halls",
+														":movieId"
+													],
+													"variable": [
+														{
+															"key": "movieId",
+															"value": "<string>",
+															"description": "(Required) "
+														}
+													]
+												},
+												"description": "Retrieve only the halls where a given movie is currently being shown."
+											},
+											"response": [
+												{
+													"name": "OK",
+													"originalRequest": {
+														"method": "GET",
+														"header": [
+															{
+																"key": "Accept",
+																"value": "*/*"
+															}
+														],
+														"url": {
+															"raw": "{{baseUrl}}/api/showtimes/halls/:movieId",
+															"host": [
+																"{{baseUrl}}"
+															],
+															"path": [
+																"api",
+																"showtimes",
+																"halls",
+																":movieId"
+															],
+															"variable": [
+																{
+																	"key": "movieId"
+																}
+															]
+														}
+													},
+													"status": "OK",
+													"code": 200,
+													"_postman_previewlanguage": "text",
+													"header": [
+														{
+															"key": "Content-Type",
+															"value": "*/*"
+														}
+													],
+													"cookie": [],
+													"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"capacity\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"capacity\": \"<integer>\"\n  }\n]"
+												}
+											]
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all showtimes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/showtimes",
+								"description": "Retrieve a list of all scheduled showtimes."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/showtimes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"movie\": {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"genre\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"rating\": \"<double>\",\n      \"releaseYear\": \"<integer>\"\n    },\n    \"theater\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"location\": \"<string>\"\n    },\n    \"hall\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"capacity\": \"<integer>\"\n    },\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"movie\": {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"genre\": \"<string>\",\n      \"duration\": \"<integer>\",\n      \"rating\": \"<double>\",\n      \"releaseYear\": \"<integer>\"\n    },\n    \"theater\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"location\": \"<string>\"\n    },\n    \"hall\": {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"capacity\": \"<integer>\"\n    },\n    \"startTime\": \"<dateTime>\",\n    \"endTime\": \"<dateTime>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a new showtime",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"movieId\": \"<string>\",\n  \"hallId\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/showtimes",
+								"description": "Schedule a new movie showtime in a specific hall."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"movieId\": \"<string>\",\n  \"hallId\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/showtimes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "movies",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a movie by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/movies/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"movies",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a specific movie by its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/movies/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"movies",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Update a movie",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"genre\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"rating\": \"<double>\",\n  \"releaseYear\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/movies/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"movies",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Modify an existing movie's details using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"genre\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"rating\": \"<double>\",\n  \"releaseYear\": \"<integer>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/movies/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"movies",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Delete a movie",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/movies/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"movies",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Remove a movie from the system using its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/movies/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"movies",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all movies",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/movies",
+								"description": "Retrieve a list of all available movies."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/movies"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"title\": \"<string>\",\n    \"genre\": \"<string>\",\n    \"duration\": \"<integer>\",\n    \"rating\": \"<double>\",\n    \"releaseYear\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"title\": \"<string>\",\n    \"genre\": \"<string>\",\n    \"duration\": \"<integer>\",\n    \"rating\": \"<double>\",\n    \"releaseYear\": \"<integer>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a new movie",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"genre\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"rating\": \"<double>\",\n  \"releaseYear\": \"<integer>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/movies",
+								"description": "Add a new movie to the system."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"genre\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"rating\": \"<double>\",\n  \"releaseYear\": \"<integer>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/movies"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": \"<uuid>\",\n  \"title\": \"<string>\",\n  \"genre\": \"<string>\",\n  \"duration\": \"<integer>\",\n  \"rating\": \"<double>\",\n  \"releaseYear\": \"<integer>\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "halls",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get a hall by ID",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/halls/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"halls",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Retrieve details of a specific hall by its ID."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/api/halls/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"halls",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{}"
+										}
+									]
+								},
+								{
+									"name": "Update an existing hall by id",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<integer>\",\n  \"theaterId\": \"<uuid>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/halls/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"halls",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Updating Hall in system."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "PUT",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "Accept",
+														"value": "*/*"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<integer>\",\n  \"theaterId\": \"<uuid>\"\n}",
+													"options": {
+														"raw": {
+															"headerFamily": "json",
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{baseUrl}}/api/halls/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"halls",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "*/*"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"capacity\": \"<integer>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "Delete a hall by id",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/halls/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"halls",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "<string>",
+													"description": "(Required) "
+												}
+											]
+										},
+										"description": "Deleting Hall in system."
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/halls/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"halls",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Get all halls",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/halls",
+								"description": "Retrieve a list of all available halls."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/halls"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"capacity\": \"<integer>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"capacity\": \"<integer>\"\n  }\n]"
+								}
+							]
+						},
+						{
+							"name": "Create a new hall within theater",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<integer>\",\n  \"theaterId\": \"<uuid>\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/halls",
+								"description": "Add a new hall to the theater."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"name\": \"<string>\",\n  \"capacity\": \"<integer>\",\n  \"theaterId\": \"<uuid>\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/halls"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "{}"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "ticket-events",
+					"item": [
+						{
+							"name": "Get all ticket events",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "*/*"
+									}
+								],
+								"url": "{{baseUrl}}/api/ticket-events",
+								"description": "Retrieve a list of all ticket-related events."
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "*/*"
+											}
+										],
+										"url": "{{baseUrl}}/api/ticket-events"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "*/*"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"eventType\": \"<string>\",\n    \"ticket\": {\n      \"id\": \"<uuid>\",\n      \"showtime\": {\n        \"id\": \"<uuid>\",\n        \"movie\": {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"genre\": \"<string>\",\n          \"duration\": \"<integer>\",\n          \"rating\": \"<double>\",\n          \"releaseYear\": \"<integer>\"\n        },\n        \"theater\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"location\": \"<string>\"\n        },\n        \"hall\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"capacity\": \"<integer>\"\n        },\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\"\n      },\n      \"user\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"seatNumber\": \"<integer>\",\n      \"price\": \"<double>\"\n    },\n    \"eventTime\": \"<dateTime>\",\n    \"details\": \"<string>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"eventType\": \"<string>\",\n    \"ticket\": {\n      \"id\": \"<uuid>\",\n      \"showtime\": {\n        \"id\": \"<uuid>\",\n        \"movie\": {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"genre\": \"<string>\",\n          \"duration\": \"<integer>\",\n          \"rating\": \"<double>\",\n          \"releaseYear\": \"<integer>\"\n        },\n        \"theater\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"location\": \"<string>\"\n        },\n        \"hall\": {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"capacity\": \"<integer>\"\n        },\n        \"startTime\": \"<dateTime>\",\n        \"endTime\": \"<dateTime>\"\n      },\n      \"user\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\",\n        \"email\": \"<string>\"\n      },\n      \"seatNumber\": \"<integer>\",\n      \"price\": \"<double>\"\n    },\n    \"eventTime\": \"<dateTime>\",\n    \"details\": \"<string>\"\n  }\n]"
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

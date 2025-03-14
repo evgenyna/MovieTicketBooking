@@ -1,9 +1,12 @@
 package com.movie.ticketbooking.service;
 
+import com.movie.ticketbooking.dao.TicketEventRepository;
 import com.movie.ticketbooking.dao.TicketRepository;
 import com.movie.ticketbooking.model.Showtime;
 import com.movie.ticketbooking.model.Ticket;
+import com.movie.ticketbooking.model.TicketEvent;
 import com.movie.ticketbooking.model.User;
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,13 @@ import java.util.UUID;
 @Service
 public class TicketService {
     private static final Logger logger = LoggerFactory.getLogger(TicketService.class);
-    private final TicketRepository ticketRepository;
 
-    public TicketService(TicketRepository ticketRepository) {
+    private final TicketRepository ticketRepository;
+    private final TicketEventRepository ticketEventRepository;  // ✅ Inject TicketEventRepository
+
+    public TicketService(TicketRepository ticketRepository, TicketEventRepository ticketEventRepository) {
         this.ticketRepository = ticketRepository;
+        this.ticketEventRepository = ticketEventRepository;  // ✅ Assign TicketEventRepository
     }
 
     //  Get all tickets
@@ -75,31 +81,49 @@ public class TicketService {
         // Save the ticket if no conflicts
         Ticket ticket = new Ticket(showtime, user, seatNumber, price);
         Ticket savedTicket = ticketRepository.save(ticket);
-        logger.info("🎟️ Ticket booked successfully. Ticket ID: {}, Price: {}", savedTicket.getId(), price);
+
+        // ✅ Log the ticket booking event
+        TicketEvent event = new TicketEvent("ticket_booked", savedTicket, "User booked a ticket.");
+        ticketEventRepository.save(event);
+        logger.info("✅ Event logged: ticket_booked for ticket ID: {}", savedTicket.getId());
+        logger.info("Ticket booked successfully. Ticket ID: {}, Price: {}", savedTicket.getId(), price);
 
         return savedTicket;
     }
 
-    //  Cancel a ticket
+    @Transactional
     public boolean cancelTicket(UUID ticketId) {
         logger.info("Attempting to cancel ticket with ID: {}", ticketId);
-        Optional<Ticket> ticketOptional = ticketRepository.findById(ticketId);
 
+        Optional<Ticket> ticketOptional = ticketRepository.findById(ticketId);
         if (ticketOptional.isPresent()) {
             Ticket ticket = ticketOptional.get();
+
             if (LocalDateTime.now().isAfter(ticket.getShowtime().getStartTime().minusHours(3))) {
                 logger.warn("Cancellation failed. Cannot cancel tickets within 3 hours of showtime.");
                 throw new RuntimeException("Cannot cancel tickets within 3 hours of showtime.");
             }
 
+            // ✅ Extract details (avoid using full Ticket object to prevent Hibernate errors)
+            UUID ticketRefId = ticket.getId();
+            String ticketDetails = "User canceled ticket for showtime: " + ticket.getShowtime().getId();
+
+            // ✅ Delete the ticket first (to avoid transient object errors)
             ticketRepository.delete(ticket);
-            logger.info(" Ticket with ID {} successfully canceled.", ticketId);
+            ticketRepository.flush(); // Force immediate deletion
+
+            // ✅ Now log the event separately after deletion
+            TicketEvent event = new TicketEvent("ticket_deleted", null, ticketDetails);
+            ticketEventRepository.save(event);
+            logger.info("✅ Event logged: ticket_deleted for ticket ID: {}", ticketRefId);
+
             return true;
         } else {
             logger.warn("Cancellation failed. Ticket with ID {} not found.", ticketId);
             return false;
         }
     }
+
 
     //  Change a ticket seat
     public Ticket changeSeat(UUID ticketId, int newSeatNumber) {
@@ -127,6 +151,10 @@ public class TicketService {
 
             ticket.setSeatNumber(newSeatNumber);
             Ticket updatedTicket = ticketRepository.save(ticket);
+
+            // ✅ Log the seat change event
+            TicketEvent event = new TicketEvent("ticket_seat_changed", updatedTicket, "User changed seat to " + newSeatNumber);
+            ticketEventRepository.save(event);
             logger.info(" Seat change successful. Ticket ID: {} now has seat {}", updatedTicket.getId(), newSeatNumber);
 
             return updatedTicket;

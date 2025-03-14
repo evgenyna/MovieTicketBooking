@@ -19,6 +19,7 @@ public class DatabaseInitializer {
     private final ShowtimeRepository showtimeRepository;
     private final TicketRepository ticketRepository;
     private final UserRepository userRepository;
+    private final TicketEventRepository ticketEventRepository;
 
     public DatabaseInitializer(
             MovieRepository movieRepository,
@@ -26,7 +27,8 @@ public class DatabaseInitializer {
             HallRepository hallRepository,
             ShowtimeRepository showtimeRepository,
             TicketRepository ticketRepository,
-            UserRepository userRepository)
+            UserRepository userRepository,
+            TicketEventRepository ticketEventRepository)
     {
         this.movieRepository = movieRepository;
         this.theaterRepository = theaterRepository;
@@ -34,6 +36,7 @@ public class DatabaseInitializer {
         this.showtimeRepository = showtimeRepository;
         this.ticketRepository = ticketRepository;
         this.userRepository = userRepository;
+        this.ticketEventRepository = ticketEventRepository;
     }
 
     @PostConstruct
@@ -43,6 +46,13 @@ public class DatabaseInitializer {
         insertMovies();
         insertShowtimes();
         insertTickets();
+        ensureTicketEventTableExists();
+    }
+
+    private void ensureTicketEventTableExists() {
+        if (ticketEventRepository.count() == 0) {
+            System.out.println("TicketEvent table is ready. No initial data inserted.");
+        }
     }
 
     private void insertTheatersAndHalls() {
@@ -118,7 +128,6 @@ public class DatabaseInitializer {
 
             while (now.isBefore(twoMonthsLater)) {
                 for (Theater theater : theaters) {
-                    //List<Hall> halls = theater.getHalls(); // Get halls for this theater
                     List<Hall> halls = hallRepository.findByTheater(theater);  // Correct
 
                     int movieIndex = 0;

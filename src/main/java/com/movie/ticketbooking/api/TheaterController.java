@@ -71,7 +71,7 @@ public class TheaterController {
 
     // Delete a theater
     @DeleteMapping("/{theaterId}")
-    @Operation(summary = "Delete a theater", description = "Remove a theater from the system using its ID.")
+    @Operation(summary = "Delete a theater", description = "Remove a theater from the system using its ID. (Next update: will work with ticket events)")
     public ResponseEntity<?> deleteTheater(@PathVariable String theaterId) {
         try {
             UUID uuid = UUID.fromString(theaterId);

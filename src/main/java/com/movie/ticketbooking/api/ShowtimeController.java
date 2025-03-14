@@ -121,7 +121,7 @@ public class ShowtimeController {
 
     //  Delete a showtime
     @DeleteMapping("/{showtimeId}")
-    @Operation(summary = "Delete a showtime", description = "Remove a showtime from the schedule.")
+    @Operation(summary = "Delete a showtime", description = "Remove a showtime from the schedule. (Next update: will work with ticket events)")
     public ResponseEntity<?> deleteShowtime(@PathVariable String showtimeId) {
         try {
             UUID uuid = UUID.fromString(showtimeId);
